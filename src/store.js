@@ -24,9 +24,9 @@ export default new Vuex.Store({
       task[key] = value;
       // Vue.set(task, key, value)
     },
-    MOVE_TASK (state, { fromColumn, toColumn, taskIndex }) {
-      const taskToMove = fromColumn.plice(taskIndex, 1)[0]
-      toColumn.push(taskToMove);
+    MOVE_TASK (state, { fromTasks, toTasks, taskIndex }) {
+      const taskToMove = fromTasks.splice(taskIndex, 1)[0]
+      toTasks.push(taskToMove);
     }
   },
   getters: {
@@ -35,7 +35,7 @@ export default new Vuex.Store({
         for (const column of state.board.columns) {
           for (const task of column.tasks) {
             if (task.id === id) {
-              return task
+              return task;
             }
           }
         }
