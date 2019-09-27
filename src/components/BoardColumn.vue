@@ -11,23 +11,15 @@
       {{column.name}}
     </div>
     <div class="list-reset">
-      <div class="task"
+      <ColumnTask
         v-for="(task, $taskIndex) of column.tasks"
         :key="$taskIndex"
-        draggable
-        @dragover.prevent
-        @dragenter.prevent
-        @dragstart="pickupTask($event, $taskIndex, columnIndex)"
-        @click="goToTask(task)"
-        @drop.stop="moveTaskOrColumn($event, column.tasks, columnIndex ,$taskIndex)"
-        >
-        <span class="w-full flex-no-shrink font-bold">
-          {{task.name}}
-        </span>
-        <p v-if="task.description" class="w-full flex-no-shink mt-1 text-sm">
-          {{task.description}}
-        </p>
-      </div>
+        :columnIndex="columnIndex"
+        :taskIndex="$taskIndex"
+        :task="task"
+        :column="column"
+        :board="board"
+      />
     </div>
     <input
       type="text"
@@ -38,7 +30,11 @@
 </template>
 
 <script>
+import ColumnTask from './ColumnTask';
 export default {
+  components: {
+    ColumnTask
+  },
   props: {
     board: {
       type: Object,
@@ -54,9 +50,6 @@ export default {
     }
   },
   methods: {
-    goToTask(task) {
-      this.$router.push({name: 'task', params: {id: task.id}});
-    },
     moveTaskOrColumn(event, toTasks,toColumnIndex, toTaskIndex) {
       const type = event.dataTransfer.getData('type');
       if(type === 'task') {
@@ -89,14 +82,6 @@ export default {
 
       event.dataTransfer.setData('from-column-index', fromColumnIndex);
       event.dataTransfer.setData('type', 'column');
-    },
-    pickupTask (event, taskIndex, fromColumnIndex) {
-      event.dataTransfer.effectAllowed = 'move';
-      event.dataTransfer.dropEffect = 'move';
-
-      event.dataTransfer.setData('from-task-index', taskIndex);
-      event.dataTransfer.setData('from-column-index', fromColumnIndex);
-      event.dataTransfer.setData('type', 'task');
     },
     createTask(event, tasks) {
       this.$store.commit('CREATE_TASK', { tasks, name: event.target.value});

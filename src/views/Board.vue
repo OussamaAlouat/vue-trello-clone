@@ -64,10 +64,6 @@ export default {
 </script>
 
 <style lang="css">
-.task {
-  @apply flex items-center flex-wrap shadow mb-2 py-2 px-2 rounded bg-white text-grey-darkest no-underline;
-}
-
 
 .board {
   @apply p-4 bg-teal-dark h-full overflow-auto;
