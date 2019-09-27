@@ -1,7 +1,13 @@
 <template>
   <div class="board">
     <div class="flex flex-row items-start">
-      <div class="column" v-for="(column, $columnIndex) of board.columns" :key="$columnIndex">
+      <div
+        class="column"
+        v-for="(column, $columnIndex) of board.columns"
+        @drop="moveTask($event, column.tasks)"
+        @dragover.prevent
+        @dragenter.prevent
+        :key="$columnIndex">
         <div class="flex items-center mb-2 font-bold">
           {{column.name}}
         </div>
@@ -32,7 +38,8 @@
     <div
       class="task-bg"
       v-if="isTaskOpen"
-      @click.self="close">
+      @click.self="close"
+      @keyup.esc="close">
       <router-view />
     </div>
   </div>
@@ -66,6 +73,15 @@ export default {
       event.dataTransfer.setData('task-index', taskIndex);
       event.dataTransfer.setData('from-column-index', fromColumnIndex);
     },
+    moveTask(event, toTasks) {
+      const fromColumnIndex = event.dataTransfer.getData('from-column-index');
+      const taskIndex = event.dataTransfer.getData('task-index');
+      const fromTasks = this.board.columns[fromColumnIndex].tasks;
+      this.$store.commit('MOVE_TASK', {
+        fromTasks,
+        toTasks,
+        taskIndex
+      });
     }
   },
 };
