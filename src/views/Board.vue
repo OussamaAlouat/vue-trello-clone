@@ -9,6 +9,8 @@
           <div class="task"
             v-for="(task, $taskIndex) of column.tasks"
             :key="$taskIndex"
+            draggable
+            @dragstart="pickupTask($event, $taskIndex, $columnIndex)"
             @click="goToTask(task)"
             >
             <span class="w-full flex-no-shrink font-bold">
@@ -56,6 +58,14 @@ export default {
       console.log(event)
       this.$store.commit('CREATE_TASK', { tasks, name: event.target.value});
       event.target.value = '';
+    },
+    pickupTask (event, taskIndex, fromColumnIndex) {
+      event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.dropEffect = 'move';
+
+      event.dataTransfer.setData('task-index', taskIndex);
+      event.dataTransfer.setData('from-column-index', fromColumnIndex);
+    },
     }
   },
 };
