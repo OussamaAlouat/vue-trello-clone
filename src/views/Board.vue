@@ -1,7 +1,13 @@
 <template>
   <div class="board">
     <div class="flex flex-row items-start">
-      <div class="column" v-for="(column, $columnIndex) of board.columns" :key="$columnIndex">
+      <div
+        class="column"
+        v-for="(column, $columnIndex) of board.columns"
+        @drop="moveTask($event, column.tasks)"
+        @dragover.prevent
+        @dragenter.prevent
+        :key="$columnIndex">
         <div class="flex items-center mb-2 font-bold">
           {{column.name}}
         </div>
@@ -9,6 +15,8 @@
           <div class="task"
             v-for="(task, $taskIndex) of column.tasks"
             :key="$taskIndex"
+            draggable
+            @dragstart="pickupTask($event, $taskIndex, $columnIndex)"
             @click="goToTask(task)"
             >
             <span class="w-full flex-no-shrink font-bold">
@@ -19,6 +27,11 @@
             </p>
           </div>
         </div>
+        <input
+          type="text"
+          class="block p-2 w-full bg-transparent"
+          placeholder="Enter new task"
+          @keyup.enter="createTask($event, column.tasks)"/>
       </div>
     </div>
 
@@ -26,7 +39,7 @@
       class="task-bg"
       v-if="isTaskOpen"
       @click.self="close"
-    >
+      @keyup.esc="close">
       <router-view />
     </div>
   </div>
@@ -47,6 +60,28 @@ export default {
     },
     close() {
       this.$router.push({name: 'board'});
+    },
+    createTask(event, tasks) {
+      console.log(event)
+      this.$store.commit('CREATE_TASK', { tasks, name: event.target.value});
+      event.target.value = '';
+    },
+    pickupTask (event, taskIndex, fromColumnIndex) {
+      event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.dropEffect = 'move';
+
+      event.dataTransfer.setData('task-index', taskIndex);
+      event.dataTransfer.setData('from-column-index', fromColumnIndex);
+    },
+    moveTask(event, toTasks) {
+      const fromColumnIndex = event.dataTransfer.getData('from-column-index');
+      const taskIndex = event.dataTransfer.getData('task-index');
+      const fromTasks = this.board.columns[fromColumnIndex].tasks;
+      this.$store.commit('MOVE_TASK', {
+        fromTasks,
+        toTasks,
+        taskIndex
+      });
     }
   },
 };
