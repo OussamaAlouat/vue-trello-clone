@@ -47,6 +47,11 @@ export default {
     },
     close() {
       this.$router.push({name: 'board'});
+    },
+    createTask(event, tasks) {
+      console.log(event)
+      this.$store.commit('CREATE_TASK', { tasks, name: event.target.value});
+      event.target.value = '';
     }
   },
 };
