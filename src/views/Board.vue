@@ -1,13 +1,22 @@
 <template>
   <div class="board">
-
+    <div class="flex flex-row items-start">
+      <div class="column" v-for="column of board.columns" :key="column.id">
+        <div class="flex items-center mb-2 font-bold">
+          {{column.name}}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
-
-}
+  computed: {
+    ...mapState(['board']),
+  }
+};
 </script>
 
 <style lang="css">
