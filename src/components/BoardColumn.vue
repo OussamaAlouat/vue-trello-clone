@@ -31,51 +31,14 @@
 
 <script>
 import ColumnTask from './ColumnTask';
+import movingTasksAndColumnsMixin from '@/mixins/movingTasksAndColumnsMixin';
+
 export default {
   components: {
     ColumnTask
   },
-  props: {
-    board: {
-      type: Object,
-      required: true,
-    },
-    column: {
-      type: Object,
-      required: true
-    },
-    columnIndex: {
-      type: Number,
-      required: true
-    }
-  },
+  mixins: [movingTasksAndColumnsMixin],
   methods: {
-    moveTaskOrColumn(event, toTasks,toColumnIndex, toTaskIndex) {
-      const type = event.dataTransfer.getData('type');
-      if(type === 'task') {
-        this.moveTask(event, toTasks, toTaskIndex !== undefined ? toTaskIndex : toTasks.length);
-      } else {
-        this.moveColumn(event, toColumnIndex);
-      }
-    },
-    moveTask(event, toTasks, toTaskIndex) {
-      const fromColumnIndex = event.dataTransfer.getData('from-column-index');
-      const fromTaskIndex = event.dataTransfer.getData('from-task-index');
-      const fromTasks = this.board.columns[fromColumnIndex].tasks;
-      this.$store.commit('MOVE_TASK', {
-        fromTasks,
-        fromTaskIndex,
-        toTasks,
-        toTaskIndex
-      });
-    },
-    moveColumn(event, toColumnIndex) {
-      const fromColumnIndex = event.dataTransfer.getData('from-column-index');
-      this.$store.commit('MOVE_COLUMN', {
-        fromColumnIndex,
-        toColumnIndex
-      });
-    },
     pickupColumn(event, fromColumnIndex) {
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.dropEffect = 'move';
