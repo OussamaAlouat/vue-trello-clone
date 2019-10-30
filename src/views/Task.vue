@@ -8,7 +8,6 @@
         @change="updateTaskProperty($event, 'name')"
         @keyup.enter="updateTaskProperty($event, 'name')"
 
-
         >
       <textarea
         class="relative w-full bg-transparent px-2 mt-2 h-64 border-none leading-normal"
@@ -26,19 +25,19 @@ import { mapGetters } from 'vuex';
 export default {
   computed: {
     ...mapGetters(['getTask']),
-    task(){
+    task () {
       return this.getTask(this.$route.params.id);
     }
   },
   methods: {
-    updateTaskProperty(event, property) {
+    updateTaskProperty (event, property) {
       this.$store.commit('UPDATE_TASK', {
         task: this.task,
         key: property,
         value: event.target.value
       });
     }
-  },
+  }
 }
 </script>
 

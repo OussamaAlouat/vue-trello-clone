@@ -30,44 +30,40 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import { mapState } from 'vuex';
 import BoardColumn from '@/components/BoardColumn';
 export default {
   components: {
     BoardColumn
   },
-  data() {
+  data () {
     return {
       newColumnName: ''
     }
   },
   computed: {
     ...mapState(['board']),
-    isTaskOpen(){
+    isTaskOpen () {
       return this.$route.name === 'task';
-    },
+    }
   },
   methods: {
-    close() {
-      this.$router.push({name: 'board'});
+    close () {
+      this.$router.push({ name: 'board' });
     },
-    createColumn() {
-      if(this.newColumnName !== '') {
-        this.$store.commit('CREATE_COLUMN',{
+    createColumn () {
+      if (this.newColumnName !== '') {
+        this.$store.commit('CREATE_COLUMN', {
           name: this.newColumnName
         });
         this.newColumnName = ''
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="css">
-.task {
-  @apply flex items-center flex-wrap shadow mb-2 py-2 px-2 rounded bg-white text-grey-darkest no-underline;
-}
-
 
 .board {
   @apply p-4 bg-teal-dark h-full overflow-auto;
