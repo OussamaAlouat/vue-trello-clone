@@ -14,30 +14,26 @@ export default {
     }
   },
   methods: {
-    moveTaskOrColumn (event, toTasks,toColumnIndex, toTaskIndex) {
-      const type = event.dataTransfer.getData('type');
-      if(type === 'task') {
-        this.moveTask(event, toTasks, toTaskIndex !== undefined ? toTaskIndex : toTasks.length);
+    moveTaskOrColumn (transferData) {
+      if (transferData.type === 'task') {
+        this.moveTask(transferData);
       } else {
-        this.moveColumn(event, toColumnIndex);
+        this.moveColumn(transferData);
       }
     },
-    moveTask (event, toTasks, toTaskIndex) {
-      const fromColumnIndex = event.dataTransfer.getData('from-column-index');
-      const fromTaskIndex = event.dataTransfer.getData('from-task-index');
-      const fromTasks = this.board.columns[fromColumnIndex].tasks;
+    moveTask ({ fromColumnIndex, fromTaskIndex }) {
+      const fromTasks = this.board.columns[fromColumnIndex].tasks
       this.$store.commit('MOVE_TASK', {
         fromTasks,
         fromTaskIndex,
-        toTasks,
-        toTaskIndex
-      });
+        toTasks: this.column.tasks,
+        toTaskIndex: this.taskIndex
+      })
     },
-    moveColumn (event, toColumnIndex) {
-      const fromColumnIndex = event.dataTransfer.getData('from-column-index');
+    moveColumn ({ fromColumnIndex }) {
       this.$store.commit('MOVE_COLUMN', {
         fromColumnIndex,
-        toColumnIndex
+        toColumnIndex: this.columnIndex
       });
     }
   }
