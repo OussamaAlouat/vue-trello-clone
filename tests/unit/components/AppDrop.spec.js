@@ -4,7 +4,6 @@ import AppDrop from '@/components/AppDrop.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);
-const $t = () => {};
 
 describe('AppDrop component', () => {
   let wrapper;
@@ -14,7 +13,6 @@ describe('AppDrop component', () => {
     wrapper = shallowMount(AppDrop,
       {
         localVue,
-        mocks: { $t },
         props: {
           transferData
         }

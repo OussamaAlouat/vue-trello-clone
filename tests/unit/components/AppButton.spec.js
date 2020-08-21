@@ -5,7 +5,6 @@ import AppButton from '@/components/AppButton.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);
-const $t = () => {};
 
 describe('AppButton component', () => {
   let wrapper;
@@ -14,8 +13,7 @@ describe('AppButton component', () => {
   beforeEach(() => {
     wrapper = shallowMount(AppButton,
       {
-        localVue,
-        mocks: { $t }
+        localVue
       });
   });
 

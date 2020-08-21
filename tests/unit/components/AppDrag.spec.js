@@ -4,7 +4,6 @@ import AppDrag from '@/components/AppDrag.vue';
 
 const localVue = createLocalVue();
 localVue.use(VueRouter);
-const $t = () => {};
 
 describe('AppDrag component', () => {
   let wrapper;
@@ -14,7 +13,6 @@ describe('AppDrag component', () => {
     wrapper = shallowMount(AppDrag,
       {
         localVue,
-        mocks: { $t },
         props: {
           transferData
         }
