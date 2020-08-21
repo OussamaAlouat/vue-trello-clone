@@ -17,6 +17,8 @@
         placeholder="Enter a description"
         >
       </textarea>
+
+      <App-button @cliked="removeTask()" type="danger">Remove</App-button>
     </div>
   </div>
 </template>
@@ -31,7 +33,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['updateTaskAction']),
+    ...mapActions(['updateTaskAction', 'removeTaskAction']),
     updateTaskProperty (event, property) {
       const data = {
         task: this.task,
@@ -40,6 +42,10 @@ export default {
       };
 
       this.updateTaskAction({ data });
+    },
+    removeTask () {
+      this.removeTaskAction({ task: this.task })
+      this.$router.push({ name: 'board' })
     }
   }
 }
