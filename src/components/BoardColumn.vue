@@ -39,6 +39,7 @@ import ColumnTask from './ColumnTask';
 import movingTasksAndColumnsMixin from '@/mixins/movingTasksAndColumnsMixin';
 import AppDrag from './AppDrag.vue';
 import AppDrop from './AppDrop.vue';
+import { mapActions } from 'vuex';
 
 export default {
   components: {
@@ -48,6 +49,7 @@ export default {
   },
   mixins: [movingTasksAndColumnsMixin],
   methods: {
+    ...mapActions(['createTaskAction']),
     pickupColumn (event, fromColumnIndex) {
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.dropEffect = 'move';
@@ -56,7 +58,7 @@ export default {
       event.dataTransfer.setData('type', 'column');
     },
     createTask (event, tasks) {
-      this.$store.commit('CREATE_TASK', { tasks, name: event.target.value });
+      this.createTaskAction({ tasks, name: event.target.value })
       event.target.value = '';
     }
   }

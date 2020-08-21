@@ -9,17 +9,18 @@
         fromColumnIndex: columnIndex,
         fromTaskIndex: taskIndex
       }"
-      @click="goToTask(task)"
     >
-      <span class="w-full flex-no-shrink font-bold">
-        {{ task.name }}
-      </span>
-      <p
-        v-if="task.description"
-        class="w-full flex-no-shrink mt-1 text-sm"
-      >
-        {{ task.description }}
-      </p>
+      <div class="click-task" @click="goToTask(task)">
+        <span class="w-full flex-no-shrink font-bold">
+          {{ task.name }}
+        </span>
+        <p
+          v-if="task.description"
+          class="w-full flex-no-shrink mt-1 text-sm"
+        >
+          {{ task.description }}
+        </p>
+      </div>
     </AppDrag>
   </AppDrop>
 </template>
@@ -44,6 +45,7 @@ export default {
   },
   methods: {
     goToTask (task) {
+      console.log('Im here');
       this.$router.push({ name: 'task', params: { id: task.id } })
     }
   }
@@ -53,6 +55,9 @@ export default {
 <style>
 .task {
   @apply flex items-center flex-wrap shadow mb-2 py-2 px-2 rounded bg-white text-grey-darkest no-underline;
+}
+.click-task{
+  cursor: pointer;
 }
 
 </style>
