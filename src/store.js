@@ -42,7 +42,6 @@ export default new Vuex.Store({
     REMOVE_TASK (state, { task }) {
       const board = { ...state.board }
       for (let i = 0; i < board.columns.length; i++) {
-        console.log(board.columns[i]);
         const tasks = [ ...board.columns[i].tasks ];
 
         const filtered = remove(tasks, (t) => t.id !== task.id);
@@ -74,7 +73,6 @@ export default new Vuex.Store({
       commit('CREATE_COLUMN', { name });
     },
     updateTaskAction ({ commit }, { data }) {
-      console.log(data);
       const { task, key, value } = data;
       commit('UPDATE_TASK', { task, key, value });
     },
