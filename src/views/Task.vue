@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
   computed: {
     ...mapGetters(['getTask']),
@@ -30,12 +30,15 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['updateTaskAction']),
     updateTaskProperty (event, property) {
-      this.$store.commit('UPDATE_TASK', {
+      const data = {
         task: this.task,
         key: property,
         value: event.target.value
-      });
+      };
+
+      this.updateTaskAction({ data });
     }
   }
 }

@@ -44,6 +44,7 @@ export default {
   },
   methods: {
     goToTask (task) {
+      console.log('Im here');
       this.$router.push({ name: 'task', params: { id: task.id } })
     }
   }
