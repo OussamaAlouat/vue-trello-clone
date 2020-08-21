@@ -28,7 +28,6 @@ export default new Vuex.Store({
     },
     UPDATE_TASK (state, { task, key, value }) {
       task[key] = value;
-      // Vue.set(task, key, value)
     },
     MOVE_TASK (state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex }) {
       const taskToMove = fromTasks.splice(fromTaskIndex, 1)[0]
@@ -51,6 +50,20 @@ export default new Vuex.Store({
           }
         }
       }
+    }
+  },
+  actions: {
+    createTaskAction ({ commit }, { tasks, name }) {
+      commit('CREATE_TASK', { tasks, name });
+    },
+
+    createColumnAction ({ commit }, { name }) {
+      commit('CREATE_COLUMN', { name });
+    },
+    updateTaskAction ({ commit }, { data }) {
+      console.log(data);
+      const { task, key, value } = data;
+      commit('UPDATE_TASK', { task, key, value });
     }
   }
 })

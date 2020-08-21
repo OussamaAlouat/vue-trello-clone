@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import BoardColumn from '@/components/BoardColumn';
 export default {
   components: {
@@ -48,14 +48,13 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['createColumnAction']),
     close () {
       this.$router.push({ name: 'board' });
     },
     createColumn () {
       if (this.newColumnName !== '') {
-        this.$store.commit('CREATE_COLUMN', {
-          name: this.newColumnName
-        });
+        this.createColumnAction({ name: this.newColumnName });
         this.newColumnName = ''
       }
     }
