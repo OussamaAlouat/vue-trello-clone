@@ -1,18 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import defaultBoard from './default-board'
 import { saveStatePlugin, uuid } from './utils'
 import { remove } from 'lodash'
+import state from './store/state'
 
 Vue.use(Vuex)
 
-const board = JSON.parse(localStorage.getItem('board')) || defaultBoard
-
 export default new Vuex.Store({
   plugins: [saveStatePlugin],
-  state: {
-    board
-  },
+  state: { ...state },
   mutations: {
     CREATE_TASK (state, { tasks, name }) {
       tasks.push({
