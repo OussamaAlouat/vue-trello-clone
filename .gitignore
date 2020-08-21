@@ -1,6 +1,9 @@
 .DS_Store
 node_modules
 /dist
+tests/unit/coverage
+npm-debug.log
+/coverage
 
 # local env files
 .env.local
