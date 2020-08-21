@@ -14,6 +14,7 @@
         :value="task.description"
         @change="updateTaskProperty($event, 'description')"
         @keyup.enter="updateTaskProperty($event, 'description')"
+        placeholder="Enter a description"
         >
       </textarea>
     </div>
