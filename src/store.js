@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import defaultBoard from './default-board'
 import { saveStatePlugin, uuid } from './utils'
+import { remove } from 'lodash'
 
 Vue.use(Vuex)
 
@@ -37,6 +38,17 @@ export default new Vuex.Store({
       const columnList = state.board.columns;
       const columnToMove = columnList.splice(fromColumnIndex, 1)[0];
       columnList.splice(toColumnIndex, 0, columnToMove);
+    },
+    REMOVE_TASK (state, { task }) {
+      const board = { ...state.board }
+      for (let i = 0; i < board.columns.length; i++) {
+        const tasks = [ ...board.columns[i].tasks ];
+
+        const filtered = remove(tasks, (t) => t.id !== task.id);
+        board.columns[i].tasks = filtered;
+      }
+
+      state.board = board;
     }
   },
   getters: {
@@ -61,9 +73,11 @@ export default new Vuex.Store({
       commit('CREATE_COLUMN', { name });
     },
     updateTaskAction ({ commit }, { data }) {
-      console.log(data);
       const { task, key, value } = data;
       commit('UPDATE_TASK', { task, key, value });
+    },
+    removeTaskAction ({ commit }, { task }) {
+      commit('REMOVE_TASK', { task })
     }
   }
 })

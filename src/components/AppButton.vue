@@ -1,5 +1,5 @@
 <template>
-  <button type="button" class="button" :class="typeClasses">
+  <button type="button" class="button" :class="typeClasses" @click="emitClik()">
     <slot/>
   </button>
 </template>
@@ -11,6 +11,7 @@ export default {
       type: String
     }
   },
+  name: 'AppButton',
   computed: {
     typeClasses () {
       switch (this.type) {
@@ -19,6 +20,11 @@ export default {
         default:
           return 'bg-teal'
       }
+    }
+  },
+  methods: {
+    emitClik () {
+      this.$emit('cliked');
     }
   }
 }
