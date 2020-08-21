@@ -6,7 +6,7 @@ const localVue = createLocalVue();
 localVue.use(VueRouter);
 const $t = () => {};
 
-describe('PlanificationDrawer component', () => {
+describe('AppButton component', () => {
   let wrapper;
 
   beforeEach(() => {
@@ -17,7 +17,7 @@ describe('PlanificationDrawer component', () => {
       });
   });
 
-  it('PlanificationDrawer is vue component', () => {
+  it('AppButton is vue component', () => {
     expect(wrapper.isVueInstance()).toBeTruthy();
   });
 });
