@@ -78,3 +78,35 @@ describe('CREATE_COLUMN', () => {
     })
   });
 });
+
+describe('UPDATE_TASK', () => {
+  const state = {};
+
+  beforeEach(() => {
+    state.board = {
+      columns: []
+    };
+  });
+
+  describe('Parameters should be nil', () => {
+    describe('task should be nil', () => {
+      it('task should be null', () => {
+        const key = 'name';
+        const value = 'new name';
+        const task = null;
+        mutations.UPDATE_TASK(state, { task, key, value });
+        expect(task).toBe(null);
+        expect(state.board.columns.length).toBe(0);
+      });
+
+      it('task should be undefined', () => {
+        const key = 'name';
+        const value = 'new name';
+        const task = undefined;
+        mutations.UPDATE_TASK(state, { task, key, value });
+        expect(task).toBe(undefined);
+        expect(state.board.columns.length).toBe(0);
+      });
+    });
+  });
+});
