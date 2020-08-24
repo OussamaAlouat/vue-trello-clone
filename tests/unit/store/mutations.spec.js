@@ -170,5 +170,33 @@ describe('UPDATE_TASK', () => {
         console.log(task);
       });
     });
+
+    describe('value should be nil', () => {
+      it('value should be null', () => {
+        const key = 'name';
+        const value = null;
+        const task = {
+          name: 'First name'
+        };
+
+        mutations.UPDATE_TASK(state, { task, key, value });
+        expect(task.name).toBe('First name');
+        expect(task).not.toMatchObject({ name: undefined })
+        expect(state.board.columns.length).toBe(0);
+      });
+
+      it('value should be undefined', () => {
+        const key = 'name';
+        const value = undefined;
+        const task = {
+          name: 'First name'
+        };
+
+        mutations.UPDATE_TASK(state, { task, key, value });
+        expect(task.name).toBe('First name');
+        expect(task).not.toMatchObject({ name: undefined })
+        expect(state.board.columns.length).toBe(0);
+      });
+    });
   });
 });
