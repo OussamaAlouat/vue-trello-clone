@@ -42,3 +42,34 @@ describe('CREATE_TASK', () => {
     });
   });
 });
+
+describe('CREATE_COLUMN', () => {
+  const state = {};
+  const columnName = 'test';
+
+  beforeEach(() => {
+    state.board = {
+      columns: []
+    };
+  });
+
+  describe('Parameter sholud be nil or empty', () => {
+    it('Parameter should be null', () => {
+      mutations.CREATE_COLUMN(state, { name: null });
+      console.log(state);
+      expect(state.board.columns.length).toBe(0);
+    });
+
+    it('Parameter should be undefined', () => {
+      mutations.CREATE_COLUMN(state, { name: undefined });
+      console.log(state);
+      expect(state.board.columns.length).toBe(0);
+    });
+
+    it('Parameter should be empty string', () => {
+      mutations.CREATE_COLUMN(state, { name: '' });
+      console.log(state);
+      expect(state.board.columns.length).toBe(0);
+    });
+  });
+});
