@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { saveStatePlugin, uuid } from './utils'
 import { remove } from 'lodash'
+
 import state from './store/state'
+import getters from './store/getters'
 
 Vue.use(Vuex)
 
@@ -48,17 +50,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    getTask (state) {
-      return (id) => {
-        for (const column of state.board.columns) {
-          for (const task of column.tasks) {
-            if (task.id === id) {
-              return task;
-            }
-          }
-        }
-      }
-    }
+    ...getters
   },
   actions: {
     createTaskAction ({ commit }, { tasks, name }) {
