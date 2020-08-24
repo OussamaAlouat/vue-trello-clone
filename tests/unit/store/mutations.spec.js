@@ -128,5 +128,47 @@ describe('UPDATE_TASK', () => {
         expect(state.board.columns.length).toBe(0);
       });
     });
+
+    describe('key should be nil or empty', () => {
+      it('key should be null', () => {
+        const key = null;
+        const value = 'new name';
+        const task = {
+          name: 'First name'
+        };
+
+        mutations.UPDATE_TASK(state, { task, key, value });
+        expect(task.name).toBe('First name');
+        expect(task).not.toMatchObject({ ...task, null: value })
+        expect(state.board.columns.length).toBe(0);
+      });
+
+      it('key should be undefined', () => {
+        const key = undefined;
+        const value = 'new name';
+        const task = {
+          name: 'First name'
+        };
+
+        mutations.UPDATE_TASK(state, { task, key, value });
+        expect(task.name).toBe('First name');
+        expect(task).not.toMatchObject({ ...task, undefined: value })
+        expect(state.board.columns.length).toBe(0);
+      });
+
+      it('key should be empty string', () => {
+        const key = '';
+        const value = 'new name';
+        const task = {
+          name: 'First name'
+        };
+
+        mutations.UPDATE_TASK(state, { task, key, value });
+        expect(task.name).toBe('First name');
+        expect(task).not.toMatchObject({ ...task, '': value })
+        expect(state.board.columns.length).toBe(0);
+        console.log(task);
+      });
+    });
   });
 });
