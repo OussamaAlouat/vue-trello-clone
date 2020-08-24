@@ -1,4 +1,4 @@
-import { remove, isNil } from 'lodash'
+import { remove, isNil, isObject } from 'lodash'
 import { uuid } from '../utils'
 
 export default {
@@ -22,7 +22,7 @@ export default {
   },
 
   UPDATE_TASK (state, { task, key, value }) {
-    if (!isNil(task)) {
+    if (!isNil(task) && isObject(task)) {
       task[key] = value;
     }
   },

@@ -89,7 +89,7 @@ describe('UPDATE_TASK', () => {
   });
 
   describe('Parameters should be nil', () => {
-    describe('task should be nil', () => {
+    describe('task should be nil or empty', () => {
       it('task should be null', () => {
         const key = 'name';
         const value = 'new name';
@@ -105,6 +105,26 @@ describe('UPDATE_TASK', () => {
         const task = undefined;
         mutations.UPDATE_TASK(state, { task, key, value });
         expect(task).toBe(undefined);
+        expect(state.board.columns.length).toBe(0);
+      });
+
+      it('task should to be array', () => {
+        const task = [];
+        const key = 'name';
+        const value = 'new name';
+
+        mutations.UPDATE_TASK(state, { task, key, value });
+        expect(task.length).toBe(0);
+        expect(state.board.columns.length).toBe(0);
+      });
+
+      it('task should to be string', () => {
+        const task = '';
+        const key = 'name';
+        const value = 'new name';
+
+        mutations.UPDATE_TASK(state, { task, key, value });
+        expect(task).toEqual('');
         expect(state.board.columns.length).toBe(0);
       });
     });
