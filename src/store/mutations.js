@@ -13,10 +13,12 @@ export default {
   },
 
   CREATE_COLUMN (state, { name }) {
-    state.board.columns.push({
-      name,
-      tasks: []
-    });
+    if (!isNil(name) && name !== '') {
+      state.board.columns.push({
+        name,
+        tasks: []
+      });
+    }
   },
 
   UPDATE_TASK (state, { task, key, value }) {
