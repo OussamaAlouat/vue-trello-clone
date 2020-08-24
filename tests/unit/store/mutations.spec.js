@@ -1,11 +1,13 @@
 import mutations from '@/store/mutations'
 describe('CREATE_TASK', () => {
-  describe('Parameters should be nil', () => {
-    const state = {};
-    beforeEach(() => {
-      state.board = {};
-    });
+  const state = {};
+  const taskName = 'test';
 
+  beforeEach(() => {
+    state.board = {};
+  });
+
+  describe('Parameters should be nil', () => {
     it('name parameter should be null', () => {
       const tasks = [];
       mutations.CREATE_TASK(state, { name: null, tasks });
@@ -14,7 +16,7 @@ describe('CREATE_TASK', () => {
 
     it('tasks parameter should be null', () => {
       const tasks = null;
-      mutations.CREATE_TASK(state, { name: null, tasks });
+      mutations.CREATE_TASK(state, { name: taskName, tasks });
       expect(tasks).toBe(null);
     });
 
@@ -26,8 +28,17 @@ describe('CREATE_TASK', () => {
 
     it('tasks parameter should be undefined', () => {
       const tasks = undefined;
-      mutations.CREATE_TASK(state, { name: null, tasks });
+      mutations.CREATE_TASK(state, { name: taskName, tasks });
       expect(tasks).toBe(undefined);
+    });
+  });
+
+  describe('Works well', () => {
+    it('name parameter should have content', () => {
+      const tasks = [];
+      mutations.CREATE_TASK(state, { name: taskName, tasks });
+      expect(tasks.length).toBe(1);
+      expect(tasks[0].name).toEqual(taskName);
     });
   });
 });
