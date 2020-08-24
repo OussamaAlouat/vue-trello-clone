@@ -3,7 +3,6 @@ import { uuid } from '../utils'
 
 export default {
   CREATE_TASK (state, { tasks, name }) {
-    console.log(tasks);
     if (!isNil(name) && !isNil(tasks)) {
       tasks.push({
         name,
