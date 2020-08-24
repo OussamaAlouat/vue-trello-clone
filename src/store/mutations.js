@@ -22,7 +22,9 @@ export default {
   },
 
   UPDATE_TASK (state, { task, key, value }) {
-    task[key] = value;
+    if (!isNil(task)) {
+      task[key] = value;
+    }
   },
 
   MOVE_TASK (state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex }) {
