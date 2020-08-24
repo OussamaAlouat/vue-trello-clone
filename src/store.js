@@ -1,57 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { saveStatePlugin, uuid } from './utils'
-import { remove } from 'lodash'
+import { saveStatePlugin } from './utils'
 
 import state from './store/state'
 import getters from './store/getters'
+import mutations from './store/mutations'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   plugins: [saveStatePlugin],
   state: { ...state },
-  mutations: {
-    CREATE_TASK (state, { tasks, name }) {
-      tasks.push({
-        name,
-        id: uuid(),
-        description: ''
-      })
-    },
-    CREATE_COLUMN (state, { name }) {
-      state.board.columns.push({
-        name,
-        tasks: []
-      });
-    },
-    UPDATE_TASK (state, { task, key, value }) {
-      task[key] = value;
-    },
-    MOVE_TASK (state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex }) {
-      const taskToMove = fromTasks.splice(fromTaskIndex, 1)[0]
-      toTasks.splice(toTaskIndex, 0, taskToMove);
-    },
-    MOVE_COLUMN (state, { fromColumnIndex, toColumnIndex }) {
-      const columnList = state.board.columns;
-      const columnToMove = columnList.splice(fromColumnIndex, 1)[0];
-      columnList.splice(toColumnIndex, 0, columnToMove);
-    },
-    REMOVE_TASK (state, { task }) {
-      const board = { ...state.board }
-      for (let i = 0; i < board.columns.length; i++) {
-        const tasks = [ ...board.columns[i].tasks ];
+  mutations: { ...mutations },
+  getters: { ...getters },
 
-        const filtered = remove(tasks, (t) => t.id !== task.id);
-        board.columns[i].tasks = filtered;
-      }
-
-      state.board = board;
-    }
-  },
-  getters: {
-    ...getters
-  },
   actions: {
     createTaskAction ({ commit }, { tasks, name }) {
       commit('CREATE_TASK', { tasks, name });
