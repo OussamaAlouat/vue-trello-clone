@@ -9,13 +9,9 @@ describe('AppDrop component', () => {
   let wrapper;
 
   beforeEach(() => {
-    const transferData = {};
     wrapper = shallowMount(AppDrop,
       {
-        localVue,
-        props: {
-          transferData
-        }
+        localVue
       });
   });
 
