@@ -1,13 +1,16 @@
-import { remove } from 'lodash'
-import { uuid } from './utils'
+import { remove, isNil } from 'lodash'
+import { uuid } from '../utils'
 
 export default {
   CREATE_TASK (state, { tasks, name }) {
-    tasks.push({
-      name,
-      id: uuid(),
-      description: ''
-    })
+    console.log(tasks);
+    if (!isNil(name) && !isNil(tasks)) {
+      tasks.push({
+        name,
+        id: uuid(),
+        description: ''
+      })
+    }
   },
 
   CREATE_COLUMN (state, { name }) {
