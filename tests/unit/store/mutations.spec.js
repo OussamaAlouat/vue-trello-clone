@@ -262,7 +262,6 @@ describe('MOVE_TASK', () => {
     });
 
     describe('toTasks should be nil', () => {
-
       it('toTasks should be null', () => {
         const fromTasks = [task];
         const toTasks = null;
@@ -282,6 +281,7 @@ describe('MOVE_TASK', () => {
         expect(fromTasks.length).toBe(1);
       });
     });
+
     describe('fromTaskIndex should be nil, higher than length or negative', () => {
       it('fromTaskIndex should be null', () => {
         const fromTasks = [task];
@@ -307,6 +307,16 @@ describe('MOVE_TASK', () => {
         const fromTasks = [task];
         const toTasks = [];
         const fromTaskIndex = 100;
+        const toTaskIndex = 0;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks.length).toBe(0);
+        expect(fromTasks.length).toBe(1);
+      });
+
+      it('fromTaskIndex should be negative', () => {
+        const fromTasks = [task];
+        const toTasks = [];
+        const fromTaskIndex = -100;
         const toTaskIndex = 0;
         mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
         expect(toTasks.length).toBe(0);
