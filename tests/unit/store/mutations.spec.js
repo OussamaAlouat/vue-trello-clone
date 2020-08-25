@@ -253,6 +253,34 @@ describe('MOVE_TASK', () => {
         expect(toTasks.length).toBe(0);
       });
     });
+
+    describe('toTasks should be nil', () => {
+      const task = {
+        description: 'Test description',
+        name: 'Test',
+        id: 'id',
+        userAssigned: null
+      };
+
+      it('toTasks should be null', () => {
+        const fromTasks = [task];
+        const toTasks = null;
+        const fromTaskIndex = 0;
+        const toTaskIndex = 0;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks).toBe(null);
+        expect(fromTasks.length).toBe(1);
+      });
+      it('toTasks should be undefined', () => {
+        const fromTasks = [task];
+        const toTasks = undefined;
+        const fromTaskIndex = 0;
+        const toTaskIndex = 0;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks).toBe(undefined);
+        expect(fromTasks.length).toBe(1);
+      });
+    })
   });
 
   describe('Parameters should not have the correct type', () => {
