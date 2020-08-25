@@ -254,3 +254,15 @@ describe('MOVE_TASK', () => {
       });
     });
   });
+
+  describe('Parameters should not have the correct type', () => {
+    it('fromTasks should not be an array', () => {
+      const fromTasks = {};
+      const toTasks = [];
+      const fromTaskIndex = 0;
+      const toTaskIndex = 0;
+      mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+      expect(toTasks.length).toBe(0);
+    });
+  });
+});
