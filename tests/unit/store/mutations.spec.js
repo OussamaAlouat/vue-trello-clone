@@ -198,4 +198,21 @@ describe('UPDATE_TASK', () => {
       });
     });
   });
+
+  describe('works well', () => {
+    it('parameters are expected', () => {
+      const task = {
+        description: 'Test description',
+        name: 'Test',
+        id: 'id',
+        userAssigned: null
+      };
+
+      const key = 'name';
+      const value = 'New test';
+
+      mutations.UPDATE_TASK(state, { task, key, value });
+      expect(task).toMatchObject({ name: value })
+    });
+  });
 });
