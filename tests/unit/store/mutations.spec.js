@@ -219,6 +219,12 @@ describe('UPDATE_TASK', () => {
 
 describe('MOVE_TASK', () => {
   const state = {};
+  const task = {
+    description: 'Test description',
+    name: 'Test',
+    id: 'id',
+    userAssigned: null
+  };
 
   beforeEach(() => {
     state.board = {
@@ -227,13 +233,6 @@ describe('MOVE_TASK', () => {
   });
 
   describe('Parameters should be nil', () => {
-    const task = {
-      description: 'Test description',
-      name: 'Test',
-      id: 'id',
-      userAssigned: null
-    };
-
     describe('fromTasks should be nil or empty', () => {
       it('fromTasks should be null', () => {
         const fromTasks = null;
