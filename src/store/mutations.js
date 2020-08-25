@@ -23,8 +23,7 @@ export default {
 
   UPDATE_TASK (state, { task, key, value }) {
     if (!isNil(task) && isObject(task) &&
-     !isNil(key) && key !== '' &&
-     !isNil(value)
+     !isNil(key) && key !== '' && !isNil(value)
     ) {
       task[key] = value;
     }

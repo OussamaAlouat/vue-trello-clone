@@ -227,6 +227,13 @@ describe('MOVE_TASK', () => {
   });
 
   describe('Parameters should be nil', () => {
+    const task = {
+      description: 'Test description',
+      name: 'Test',
+      id: 'id',
+      userAssigned: null
+    };
+
     describe('fromTasks should be nil or empty', () => {
       it('fromTasks should be null', () => {
         const fromTasks = null;
@@ -255,12 +262,6 @@ describe('MOVE_TASK', () => {
     });
 
     describe('toTasks should be nil', () => {
-      const task = {
-        description: 'Test description',
-        name: 'Test',
-        id: 'id',
-        userAssigned: null
-      };
 
       it('toTasks should be null', () => {
         const fromTasks = [task];
@@ -280,7 +281,7 @@ describe('MOVE_TASK', () => {
         expect(toTasks).toBe(undefined);
         expect(fromTasks.length).toBe(1);
       });
-    })
+    });
   });
 
   describe('Parameters should not have the correct type', () => {
