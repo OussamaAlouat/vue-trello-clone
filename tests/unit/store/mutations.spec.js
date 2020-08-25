@@ -333,5 +333,35 @@ describe('MOVE_TASK', () => {
       mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
       expect(toTasks.length).toBe(0);
     });
+
+    describe('fromTaskIndex', () => {
+      it('fromTaskIndex should be string', () => {
+        const fromTasks = [task];
+        const toTasks = [];
+        const fromTaskIndex = 'test';
+        const toTaskIndex = 0;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks.length).toBe(0);
+        expect(fromTasks.length).toBe(1);
+      });
+      it('fromTaskIndex should be float', () => {
+        const fromTasks = [task];
+        const toTasks = [];
+        const fromTaskIndex = 1.01;
+        const toTaskIndex = 0;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks.length).toBe(0);
+        expect(fromTasks.length).toBe(1);
+      });
+      it('fromTaskIndex should be object', () => {
+        const fromTasks = [task];
+        const toTasks = [];
+        const fromTaskIndex = {};
+        const toTaskIndex = 0;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks.length).toBe(0);
+        expect(fromTasks.length).toBe(1);
+      });
+    });
   });
 });
