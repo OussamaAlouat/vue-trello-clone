@@ -302,6 +302,16 @@ describe('MOVE_TASK', () => {
         expect(toTasks.length).toBe(0);
         expect(fromTasks.length).toBe(1);
       });
+
+      it('fromTaskIndex should be higher than the length', () => {
+        const fromTasks = [task];
+        const toTasks = [];
+        const fromTaskIndex = 100;
+        const toTaskIndex = 0;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks.length).toBe(0);
+        expect(fromTasks.length).toBe(1);
+      });
     });
   });
 
