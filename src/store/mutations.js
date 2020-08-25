@@ -32,7 +32,8 @@ export default {
   MOVE_TASK (state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex }) {
     if (!isNil(fromTasks) && !isEmpty(fromTasks) &&
       !isNil(toTasks) && !isNil(fromTaskIndex) &&
-      fromTaskIndex <= fromTasks.length
+      fromTaskIndex <= fromTasks.length &&
+      fromTaskIndex >= 0
     ) {
       const taskToMove = fromTasks.splice(fromTaskIndex, 1)[0]
       toTasks.splice(toTaskIndex, 0, taskToMove);
