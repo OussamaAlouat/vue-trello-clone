@@ -1,4 +1,4 @@
-import { remove, isNil, isObject } from 'lodash'
+import { remove, isNil, isObject, isEmpty } from 'lodash'
 import { uuid } from '../utils'
 
 export default {
@@ -31,8 +31,10 @@ export default {
   },
 
   MOVE_TASK (state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex }) {
-    const taskToMove = fromTasks.splice(fromTaskIndex, 1)[0]
-    toTasks.splice(toTaskIndex, 0, taskToMove);
+    if (!isNil(fromTasks) && !isEmpty(fromTasks)) {
+      const taskToMove = fromTasks.splice(fromTaskIndex, 1)[0]
+      toTasks.splice(toTaskIndex, 0, taskToMove);
+    }
   },
 
   MOVE_COLUMN (state, { fromColumnIndex, toColumnIndex }) {
