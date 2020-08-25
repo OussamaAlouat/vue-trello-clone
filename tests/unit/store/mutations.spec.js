@@ -216,3 +216,41 @@ describe('UPDATE_TASK', () => {
     });
   });
 });
+
+describe('MOVE_TASK', () => {
+  const state = {};
+
+  beforeEach(() => {
+    state.board = {
+      columns: []
+    };
+  });
+
+  describe('Parameters should be nil', () => {
+    describe('fromTasks should be nil or empty', () => {
+      it('fromTasks should be null', () => {
+        const fromTasks = null;
+        const toTasks = [];
+        const fromTaskIndex = 0;
+        const toTaskIndex = 0;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks.length).toBe(0);
+      });
+      it('fromTasks should be undefined', () => {
+        const fromTasks = undefined;
+        const toTasks = [];
+        const fromTaskIndex = 0;
+        const toTaskIndex = 0;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks.length).toBe(0);
+      });
+      it('fromTasks should be empty array', () => {
+        const fromTasks = [];
+        const toTasks = [];
+        const fromTaskIndex = 0;
+        const toTaskIndex = 0;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks.length).toBe(0);
+      });
+    });
+  });
