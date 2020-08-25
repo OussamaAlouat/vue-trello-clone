@@ -282,6 +282,17 @@ describe('MOVE_TASK', () => {
         expect(fromTasks.length).toBe(1);
       });
     });
+    describe('fromTaskIndex should be nil, higher than length or negative', () => {
+      it('fromTaskIndex should be null', () => {
+        const fromTasks = [task];
+        const toTasks = [];
+        const fromTaskIndex = null;
+        const toTaskIndex = 0;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks.length).toBe(0);
+        expect(fromTasks.length).toBe(1);
+      });
+    });
   });
 
   describe('Parameters should not have the correct type', () => {
