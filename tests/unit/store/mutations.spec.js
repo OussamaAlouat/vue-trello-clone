@@ -167,7 +167,6 @@ describe('UPDATE_TASK', () => {
         expect(task.name).toBe('First name');
         expect(task).not.toMatchObject({ ...task, '': value })
         expect(state.board.columns.length).toBe(0);
-        console.log(task);
       });
     });
 
