@@ -322,6 +322,48 @@ describe('MOVE_TASK', () => {
         expect(fromTasks.length).toBe(1);
       });
     });
+
+    describe('toTaskIndex should be nil, higher than length or negative', () => {
+      it('toTaskIndex should be null', () => {
+        const fromTasks = [task];
+        const toTasks = [];
+        const fromTaskIndex = 0;
+        const toTaskIndex = null;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks.length).toBe(0);
+        expect(fromTasks.length).toBe(1);
+      });
+
+      it('toTaskIndex should be undefined', () => {
+        const fromTasks = [task];
+        const toTasks = [];
+        const fromTaskIndex = 0;
+        const toTaskIndex = undefined;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks.length).toBe(0);
+        expect(fromTasks.length).toBe(1);
+      });
+
+      it('toTaskIndex should be higher than the length', () => {
+        const fromTasks = [task];
+        const toTasks = [];
+        const fromTaskIndex = 0;
+        const toTaskIndex = 10000;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks.length).toBe(0);
+        expect(fromTasks.length).toBe(1);
+      });
+
+      it('toTaskIndex should be negative', () => {
+        const fromTasks = [task];
+        const toTasks = [];
+        const fromTaskIndex = 0;
+        const toTaskIndex = -110;
+        mutations.MOVE_TASK(state, { fromTasks, toTasks, fromTaskIndex, toTaskIndex });
+        expect(toTasks.length).toBe(0);
+        expect(fromTasks.length).toBe(1);
+      });
+    });
   });
 
   describe('Parameters should not have the correct type', () => {
