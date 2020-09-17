@@ -31,6 +31,7 @@ import AppDrag from './AppDrag'
 import AppDrop from './AppDrop'
 
 export default {
+  name: 'ColumnTask',
   components: { AppDrag, AppDrop },
   mixins: [movingTasksAndColumnsMixin],
   props: {
