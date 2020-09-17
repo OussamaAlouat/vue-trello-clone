@@ -42,6 +42,8 @@ import AppDrop from './AppDrop.vue';
 import { mapActions } from 'vuex';
 
 export default {
+  name: 'BoardColumn',
+
   components: {
     ColumnTask,
     AppDrag,
