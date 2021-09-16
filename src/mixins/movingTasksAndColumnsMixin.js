@@ -27,9 +27,10 @@ export default {
         fromTasks,
         fromTaskIndex,
         toTasks: this.column.tasks,
-        toTaskIndex: this.taskIndex
+        toTaskIndex: this.taskIndex || 0
       })
     },
+
     moveColumn ({ fromColumnIndex }) {
       this.$store.commit('MOVE_COLUMN', {
         fromColumnIndex,
