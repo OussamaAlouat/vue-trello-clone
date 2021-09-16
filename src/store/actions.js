@@ -6,11 +6,17 @@ export default {
   createColumnAction ({ commit }, { name }) {
     commit('CREATE_COLUMN', { name });
   },
+
   updateTaskAction ({ commit }, { data }) {
     const { task, key, value } = data;
     commit('UPDATE_TASK', { task, key, value });
   },
+
   removeTaskAction ({ commit }, { task }) {
     commit('REMOVE_TASK', { task })
+  },
+
+  moveTaskAction({ commit }, { fromTasks, toTasks, fromTaskIndex, toTaskIndex }) {
+    commit('MOVE_TASK', { fromTasks, toTasks, fromTaskIndex, toTaskIndex })
   }
 };
