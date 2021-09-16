@@ -15,7 +15,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['moveTaskAction']),
+    ...mapActions(['moveTaskAction', 'moveColumnAction']),
     moveTaskOrColumn (transferData) {
       if (transferData.type === 'task') {
         this.moveTask(transferData);
@@ -34,10 +34,10 @@ export default {
     },
 
     moveColumn ({ fromColumnIndex }) {
-      this.$store.commit('MOVE_COLUMN', {
+      this.moveColumnAction({
         fromColumnIndex,
         toColumnIndex: this.columnIndex
-      });
+      })
     }
   }
 }

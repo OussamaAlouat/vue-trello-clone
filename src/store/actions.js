@@ -18,5 +18,9 @@ export default {
 
   moveTaskAction({ commit }, { fromTasks, toTasks, fromTaskIndex, toTaskIndex }) {
     commit('MOVE_TASK', { fromTasks, toTasks, fromTaskIndex, toTaskIndex })
+  },
+
+  moveColumnAction({ commit }, { fromColumnIndex, toColumnIndex }) {
+    commit('MOVE_COLUMN', { fromColumnIndex, toColumnIndex })
   }
 };
