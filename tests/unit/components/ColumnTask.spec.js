@@ -45,6 +45,6 @@ describe('ColumnTask component', () => {
   });
 
   it('ColumnTask is vue component', () => {
-    expect(wrapper.isVueInstance()).toBeTruthy();
+    expect(wrapper.vm).toBeTruthy();
   });
 });
