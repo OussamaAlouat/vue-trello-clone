@@ -1,20 +1,16 @@
 <template>
-  <div
-    @drop.stop="onDrop"
-    @dragover.prevent
-    @dragenter.prevent
-  >
-    <slot/>
+  <div @drop.stop="onDrop" @dragover.prevent @dragenter.prevent>
+    <slot />
   </div>
 </template>
 
 <script>
 export default {
   methods: {
-    onDrop (e) {
+    onDrop(e) {
       const transferData = JSON.parse(e.dataTransfer.getData('payload'));
-      this.$emit('drop', transferData)
-    }
-  }
-}
+      this.$emit('drop', transferData);
+    },
+  },
+};
 </script>

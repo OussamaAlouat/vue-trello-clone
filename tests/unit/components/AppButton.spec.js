@@ -18,7 +18,7 @@ describe('AppButton component', () => {
   });
 
   it('AppButton is vue component', () => {
-    expect(wrapper.isVueInstance()).toBeTruthy();
+    expect(wrapper.vm).toBeTruthy();
   });
 
   it('On click emits clicked', async () => {

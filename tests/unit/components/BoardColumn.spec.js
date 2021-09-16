@@ -40,6 +40,6 @@ describe('BoardColumn component', () => {
   });
 
   it('BoardColumn is vue component', () => {
-    expect(wrapper.isVueInstance()).toBeTruthy();
+    expect(wrapper.vm).toBeTruthy();
   });
 });

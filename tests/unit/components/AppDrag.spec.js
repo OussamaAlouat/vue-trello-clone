@@ -20,6 +20,6 @@ describe('AppDrag component', () => {
   });
 
   it('AppDrag is vue component', () => {
-    expect(wrapper.isVueInstance()).toBeTruthy();
+    expect(wrapper.vm).toBeTruthy();
   });
 });
