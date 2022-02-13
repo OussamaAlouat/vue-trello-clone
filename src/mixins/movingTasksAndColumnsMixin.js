@@ -1,3 +1,4 @@
+import { mapActions } from 'vuex'
 export default {
   props: {
     board: {
@@ -14,6 +15,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['moveTaskAction', 'moveColumnAction']),
     moveTaskOrColumn (transferData) {
       if (transferData.type === 'task') {
         this.moveTask(transferData);
@@ -23,18 +25,19 @@ export default {
     },
     moveTask ({ fromColumnIndex, fromTaskIndex }) {
       const fromTasks = this.board.columns[fromColumnIndex].tasks
-      this.$store.commit('MOVE_TASK', {
+      this.moveTaskAction({
         fromTasks,
         fromTaskIndex,
         toTasks: this.column.tasks,
-        toTaskIndex: this.taskIndex
+        toTaskIndex: this.taskIndex || 0
       })
     },
+
     moveColumn ({ fromColumnIndex }) {
-      this.$store.commit('MOVE_COLUMN', {
+      this.moveColumnAction({
         fromColumnIndex,
         toColumnIndex: this.columnIndex
-      });
+      })
     }
   }
 }

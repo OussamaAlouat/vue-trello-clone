@@ -1,16 +1,14 @@
 <template>
-  <app-drop
-    @drop="moveTaskOrColumn"
-  >
+  <app-drop @drop="moveTaskOrColumn">
     <app-drag
       class="column"
-      :transferData ="{
+      :transferData="{
         type: 'column',
-        fromColumnIndex: columnIndex
+        fromColumnIndex: columnIndex,
       }"
     >
       <div class="flex items-center mb-2 font-bold">
-        {{column.name}}
+        {{ column.name }}
       </div>
       <div class="list-reset">
         <ColumnTask
@@ -47,24 +45,24 @@ export default {
   components: {
     ColumnTask,
     AppDrag,
-    AppDrop
+    AppDrop,
   },
   mixins: [movingTasksAndColumnsMixin],
   methods: {
     ...mapActions(['createTaskAction']),
-    pickupColumn (event, fromColumnIndex) {
+    pickupColumn(event, fromColumnIndex) {
       event.dataTransfer.effectAllowed = 'move';
       event.dataTransfer.dropEffect = 'move';
 
       event.dataTransfer.setData('from-column-index', fromColumnIndex);
       event.dataTransfer.setData('type', 'column');
     },
-    createTask (event, tasks) {
-      this.createTaskAction({ tasks, name: event.target.value })
+    createTask(event, tasks) {
+      this.createTaskAction({ tasks, name: event.target.value });
       event.target.value = '';
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>

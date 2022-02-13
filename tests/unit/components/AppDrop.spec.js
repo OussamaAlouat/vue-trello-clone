@@ -16,6 +16,6 @@ describe('AppDrop component', () => {
   });
 
   it('AppDrop is vue component', () => {
-    expect(wrapper.isVueInstance()).toBeTruthy();
+    expect(wrapper.vm).toBeTruthy();
   });
 });
