@@ -52,7 +52,7 @@ export default {
   REMOVE_TASK (state, { task }) {
     const board = { ...state.board }
     for (let i = 0; i < board.columns.length; i++) {
-      const tasks = [ ...board.columns[i].tasks ];
+      const tasks = [...board.columns[i].tasks];
 
       const filtered = remove(tasks, (t) => t.id !== task.id);
       board.columns[i].tasks = filtered;
