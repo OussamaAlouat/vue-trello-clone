@@ -7,16 +7,16 @@ class TailwindVueExtractor {
   }
 }
 
-const extensionsUsingCSS = [ 'vue', 'html' ]
-const extensionsOfCSS = [ 'css', 'less', 'pcss', 'postcss', 'sass', 'scss', 'styl' ]
+const extensionsUsingCSS = ['vue', 'html']
+const extensionsOfCSS = ['css', 'less', 'pcss', 'postcss', 'sass', 'scss', 'styl']
 
 module.exports = {
   plugins: [
     require('postcss-preset-env')({ stage: 2 }),
     require('tailwindcss')('./tailwind.config.js'),
     IN_PRODUCTION && require('@fullhuman/postcss-purgecss')({
-      content: [ `./@(public|src)/**/*.@(${extensionsUsingCSS.join('|')})` ],
-      css: [ `./src/**/*.@(${extensionsOfCSS.join('|')})` ],
+      content: [`./@(public|src)/**/*.@(${extensionsUsingCSS.join('|')})`],
+      css: [`./src/**/*.@(${extensionsOfCSS.join('|')})`],
       extractors: [
         {
           extractor: TailwindVueExtractor,
@@ -24,7 +24,7 @@ module.exports = {
         }
       ],
       whitelist: [],
-      whitelistPatterns: [ /-(leave|enter|appear)(|-(to|from|active))$/, /^(?!(|.*?:)cursor-move).+-move$/, /^router-link(|-exact)-active$/ ]
+      whitelistPatterns: [/-(leave|enter|appear)(|-(to|from|active))$/, /^(?!(|.*?:)cursor-move).+-move$/, /^router-link(|-exact)-active$/]
     }),
     require('autoprefixer')()
   ]
