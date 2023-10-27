@@ -31,7 +31,7 @@
     "autoprefixer": "^10.4.12",
     "eslint": "^8.25.0",
     "eslint-plugin-vue": "^9.1.1",
-    "postcss": "^8.4.18",
+    "postcss": "^8.4.31",
     "postcss-preset-env": "^7.8.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
